@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course — PowerShell Academy</title>
+<meta name="description" content="Hands-on course from PowerShell Academy with AI mentor.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #050810; color: #f1f5f9; line-height: 1.6; }
+h1, h2, h3, h4, h5, h6, p, span, a, div, li, ol, ul, strong, em, label, button, input, textarea { color: #f1f5f9; }
+a { text-decoration: none; color: #f1f5f9; }
+img { max-width: 100%; display: block; border-radius: 12px; }
+
+/* Layout */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+/* Nav */
+.nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 16px 0 12px; border-bottom: 1px solid rgba(148,163,184,0.1); margin-bottom: 0; }
+.nav-pill { padding: 5px 8px; border-radius: 6px; font-size: 10px; font-weight: 600; transition: opacity 0.2s; }
+.nav-pill:hover { opacity: 0.8; }
+.nav-spacer { flex: 1; min-width: 4px; }
+.nav-link { padding: 5px 8px; color: #94a3b8; font-size: 10px; font-weight: 500; }
+.nav-link:hover { color: #f1f5f9; }
+
+/* Hero section */
+.course-hero { padding: 48px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.hero-image { border-radius: 14px; overflow: hidden; border: 1px solid rgba(148,163,184,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.hero-image img { width: 100%; height: auto; display: block; }
+.hero-content h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; line-height: 1.15; margin-bottom: 12px; letter-spacing: -0.02em; color: #f1f5f9; }
+.hero-content .tagline { color: #cbd5e1; font-size: 15px; margin-bottom: 16px; line-height: 1.6; }
+
+/* Meta info */
+.course-meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.meta-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #94a3b8; }
+.meta-row strong { color: #f1f5f9; font-weight: 600; }
+.meta-row .stars { color: #f59e0b; }
+
+/* Tags */
+.course-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.course-tag { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+
+/* Price block */
+.price-block { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding: 16px; background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.15); border-radius: 10px; }
+.price-block .current { font-size: 28px; font-weight: 900; color: #00d4aa; }
+.price-block .original { font-size: 16px; color: #64748b; text-decoration: line-through; }
+.price-block .discount { font-size: 11px; font-weight: 700; background: rgba(245,158,11,0.12); color: #fcd34d; padding: 3px 8px; border-radius: 4px; }
+.price-block .validity { font-size: 11px; color: #94a3b8; margin-left: auto; }
+
+/* Buttons */
+.btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.2s, transform 0.1s; }
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: linear-gradient(135deg, #6366f1, #00d4aa); color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.3); }
+.btn-secondary { background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.2); color: #f1f5f9; }
+.btn-lab { background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.25); color: #6ee7d3; }
+
+/* Section styles */
+.section { padding: 56px 0; }
+.section-dark { background: #0a0f1a; }
+.section-light { background: #050810; }
+.section-header { text-align: center; margin-bottom: 32px; }
+.section-header h2 { font-size: clamp(20px, 4vw, 30px); font-weight: 800; margin: 0; color: #f1f5f9; }
+.section-header .subtitle { color: #94a3b8; font-size: 13px; margin-top: 6px; }
+.section-label { display: inline-block; background: rgba(0,212,170,0.12); color: #6ee7d3; border: 1px solid rgba(0,212,170,0.3); padding: 4px 12px; border-radius: 12px; font-size: 10px; font-weight: 600; letter-spacing: 1px; margin-bottom: 12px; }
+
+/* Description */
+.description-content { max-width: 800px; margin: 0 auto; }
+.description-content p { color: #cbd5e1; font-size: 14px; line-height: 1.75; margin-bottom: 16px; }
+.description-content ul, .description-content ol { color: #cbd5e1; font-size: 14px; line-height: 1.75; margin: 0 0 16px 20px; }
+.description-content li { margin-bottom: 6px; }
+.description-content h3 { font-size: 18px; font-weight: 700; margin: 24px 0 10px; color: #f1f5f9; }
+.description-content strong { color: #f1f5f9; }
+.description-content a { color: #00d4aa; }
+
+/* Curriculum */
+.curriculum-list { max-width: 800px; margin: 0 auto; }
+.curriculum-module { background: #111827; border: 1px solid rgba(148,163,184,0.1); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; color: #f1f5f9; }
+.curriculum-module:hover { border-color: rgba(0,212,170,0.25); }
+.module-header { padding: 16px 20px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.module-number { width: 28px; height: 28px; background: linear-gradient(135deg, #6366f1, #00d4aa); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.module-title { font-size: 14px; font-weight: 600; flex: 1; color: #f1f5f9; }
+.module-meta { font-size: 11px; color: #64748b; }
+.module-lessons { padding: 0 20px 16px 60px; }
+.module-lessons li { color: #94a3b8; font-size: 12px; line-height: 2; list-style: none; position: relative; padding-left: 16px; }
+.module-lessons li::before { content: ''; width: 4px; height: 4px; background: #00d4aa; border-radius: 50%; position: absolute; left: 0; top: 10px; }
+
+/* Reviews */
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
+.review-card { background: #111827; border: 1px solid rgba(148,163,184,0.1); border-radius: 12px; padding: 20px; }
+.review-stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; }
+.review-text { color: #cbd5e1; font-size: 13px; line-height: 1.6; font-style: italic; margin-bottom: 12px; }
+.review-author { font-size: 12px; font-weight: 600; color: #f1f5f9; }
+.review-card p, .review-card span { color: #cbd5e1; }
+
+/* How to use */
+.how-to-use { max-width: 800px; margin: 0 auto; }
+.step-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.step-card { background: #111827; border: 1px solid rgba(148,163,184,0.1); border-radius: 10px; padding: 20px; text-align: center; }
+.step-number { width: 32px; height: 32px; background: linear-gradient(135deg, #6366f1, #00d4aa); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; margin: 0 auto 10px; }
+.step-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #f1f5f9; }
+.step-card p { font-size: 11px; color: #94a3b8; line-height: 1.5; }
+.step-card a { color: #00d4aa; }
+
+/* Footer */
+footer { background: #0a0f1a; padding: 32px 16px; border-top: 1px solid rgba(148,163,184,0.1); text-align: center; }
+footer a { color: #94a3b8; font-size: 12px; transition: color 0.2s; }
+footer a:hover { color: #f1f5f9; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .step-list { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAV                                                            -->
+<!-- ============================================================ -->
+<header style="padding: 0 16px; background: #050810;">
+<div class="container">
+<nav class="nav">
+  <a href="https://pylabs.powershellacademy.com" target="_blank" class="nav-pill" style="background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.25);color:#6ee7d3;">&#x1F40D; Python</a>
+  <a href="https://ai.powershellacademy.com" target="_blank" class="nav-pill" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:#a5b4fc;">&#x1F916; AI DBA</a>
+  <a href="https://labs.powershellacademy.com" target="_blank" class="nav-pill" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#fcd34d;">&#x26A1; PS DBA</a>
+  <a href="https://jiralabs.powershellacademy.com" target="_blank" class="nav-pill" style="background:rgba(0,180,216,0.1);border:1px solid rgba(0,180,216,0.25);color:#67e8f9;">&#x1F4CB; Jira</a>
+  <span class="nav-spacer"></span>
+  <a href="store.html" class="nav-link">&#x1F4DA; All Courses</a>
+  <a href="index.html" class="nav-link">&#x1F3E0; Home</a>
+</nav>
+</div>
+</header>
+
+<!-- ============================================================ -->
+<!-- COURSE HERO                                                    -->
+<!-- ============================================================ -->
+<section class="course-hero" style="background: #050810;">
+<div class="container">
+<div class="hero-grid">
+
+  <!-- Course Image -->
+  <div class="hero-image">
+    <img id="courseImage" src="/resources/images/cc1.jpg" alt="{{TITLE}}">
+  </div>
+
+  <!-- Course Info -->
+  <div class="hero-content">
+    <div class="course-tags" id="courseTags">
+      <span class="course-tag" style="background:rgba(0,212,170,0.12);color:#6ee7d3;">&#x1F916; AI Lab Included</span>
+      <span class="course-tag" style="background:rgba(99,102,241,0.12);color:#a5b4fc;">&#x1F3AC; Video Course</span>
+    </div>
+
+    <h1 id="courseTitle">Loading...</h1>
+    <p class="tagline" id="courseTagline"></p>
+
+    <div class="course-meta">
+      <div class="meta-row">
+        <span class="stars" id="courseStars"></span>
+        <strong id="courseRatingAvg"></strong>
+        <span id="courseRatingCount"></span>
+      </div>
+      <div class="meta-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span id="courseLearners"></span>
+      </div>
+      <div class="meta-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="courseLanguage"></span>
+      </div>
+      <div class="meta-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="courseInstructor"></span>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="price-block">
+      <span class="current" id="coursePrice"></span>
+      <span class="original" id="courseOriginalPrice"></span>
+      <span class="discount" id="courseDiscount"></span>
+      <span class="validity" id="courseValidity"></span>
+    </div>
+
+    <!-- Actions -->
+    <div class="btn-group">
+      <a href="#" class="btn btn-primary" id="buyBtn">&#x1F680; Enrol Now</a>
+      <a href="#" class="btn btn-secondary" id="previewBtn">&#x25B6; Preview</a>
+      <a href="https://ai.powershellacademy.com" target="_blank" class="btn btn-lab" id="labBtn">&#x1F9EA; Try AI Lab</a>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- DESCRIPTION                                                    -->
+<!-- ============================================================ -->
+<section class="section section-dark">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">WHY THIS COURSE</span>
+    <h2>Course Description</h2>
+  </div>
+  <div class="description-content" id="courseDescription">
+    <p style="color:#64748b;font-style:italic;">Course description will appear here.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CURRICULUM                                                     -->
+<!-- ============================================================ -->
+<section class="section section-light">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label">WHAT YOU'LL LEARN</span>
+    <h2 id="curriculumTitle">Course Curriculum</h2>
+    <p class="subtitle">Structured modules with video lessons and hands-on exercises</p>
+  </div>
+  <div class="curriculum-list" id="courseCurriculum">
+    <p style="color:#64748b;font-style:italic;text-align:center;">Curriculum details available on the enrollment page.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- HOW TO USE                                                     -->
+<!-- ============================================================ -->
+<section class="section section-dark">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label" style="background:rgba(99,102,241,0.12);color:#a5b4fc;border-color:rgba(99,102,241,0.3);">GETTING STARTED</span>
+    <h2>How to Access Your Course</h2>
+  </div>
+  <div class="how-to-use">
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4>Purchase &amp; Enrol</h4>
+        <p>Complete checkout. The course is added to your library instantly.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4>Access on Any Device</h4>
+        <p>Log in at powershellacademy.com and go to <a href="/s/mycourses" style="color:#00d4aa;">My Courses</a>. Works on desktop, tablet, or phone.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4>Practice in AI Lab</h4>
+        <p>Open the companion AI lab to run code, ask questions, and get auto-graded on challenges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- REVIEWS                                                        -->
+<!-- ============================================================ -->
+<section class="section section-light">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label" style="background:rgba(245,158,11,0.12);color:#fcd34d;border-color:rgba(245,158,11,0.3);">STUDENT FEEDBACK</span>
+    <h2 id="reviewTitle">Reviews</h2>
+  </div>
+  <div class="reviews-grid" id="courseReviews">
+    <div class="review-card">
+      <div class="review-stars">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+      <p class="review-text">"Great course with practical examples. The AI lab makes it easy to practice."</p>
+      <span class="review-author">&#8212; Student</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA BANNER                                                     -->
+<!-- ============================================================ -->
+<section style="background:#050810;padding:48px 16px;">
+<div class="container" style="text-align:center;">
+  <div style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(0,212,170,0.08));border:1px solid rgba(0,212,170,0.2);border-radius:14px;padding:36px 24px;">
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 8px;">Ready to start learning?</h2>
+    <p style="color:#cbd5e1;font-size:14px;margin:0 0 20px;">Enrol now and get instant access to video lessons, AI mentor, and hands-on labs.</p>
+    <div class="btn-group" style="justify-content:center;">
+      <a href="#" class="btn btn-primary" id="ctaEnrolBtn">&#x1F680; Enrol Now</a>
+      <a href="store.html" class="btn btn-secondary">&#x1F4DA; Browse All Courses</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                         -->
+<!-- ============================================================ -->
+<footer>
+<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;">
+  <a href="index.html" style="color:#00d4aa;font-weight:600;">&#x1F3E0; Home</a>
+  <a href="store.html">&#x1F4DA; Courses</a>
+  <a href="https://www.facebook.com/powershellacademy" target="_blank">Facebook</a>
+  <a href="https://www.linkedin.com/in/vishnu-gupthan-nair-09a12b31/" target="_blank">LinkedIn</a>
+  <a href="https://www.youtube.com/c/GraphyUniversity" target="_blank">YouTube</a>
+  <a href="https://play.google.com/store/apps/details?id=com.powershellacademy.learners" target="_blank">Android App</a>
+</div>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;">
+  <a href="https://www.powershellacademy.com/privacypolicy" style="color:#64748b;font-size:11px;">Privacy</a>
+  <a href="https://www.powershellacademy.com/termsofuse" style="color:#64748b;font-size:11px;">Terms</a>
+  <a href="https://www.powershellacademy.com/contactus" style="color:#64748b;font-size:11px;">Contact</a>
+  <a href="https://www.powershellacademy.com/refundpolicy" style="color:#64748b;font-size:11px;">Refund</a>
+</div>
+<p style="color:#475569;font-size:10px;">PowerShell Academy &#169; 2026</p>
+</footer>
+
+<!-- ============================================================ -->
+<!-- COURSE DATA + TEMPLATE ENGINE                                  -->
+<!-- ============================================================ -->
+<script>
+// Course database — add/edit courses here
+var courses = {
+  "ai-sql-gemini": {
+    title: "Build a SQL Server Newsletter Web App using Gemini and Node.js",
+    tagline: "Learn to build an AI-powered newsletter creation tool using Google Gemini API, Node.js, and SQL Server.",
+    image: "",
+    price: "Free",
+    originalPrice: "",
+    discount: "",
+    validity: "Lifetime access",
+    rating: "4.8",
+    ratingCount: "12",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "85",
+    language: "English",
+    instructor: "Powershellacademy",
+    enrollUrl: "https://www.powershellacademy.com/courses/SQL-Server-News-Letter-creation-Web-App-using-Gemini-and-node-js-69a26c71b3e4737930af1c4f",
+    labUrl: "https://ai.powershellacademy.com",
+    tags: ["AI / Gemini", "Node.js", "Free"]
+  },
+  "ps-sql-dba": {
+    title: "PowerShell for SQL Server DBAs",
+    tagline: "Master PowerShell automation for SQL Server — backups, monitoring, Always On AGs, and more across 13 modules.",
+    image: "",
+    price: "\u20B91,200",
+    originalPrice: "\u20B912,000",
+    discount: "90% OFF",
+    validity: "Lifetime access",
+    rating: "4.9",
+    ratingCount: "48",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "320",
+    language: "English",
+    instructor: "Powershellacademy",
+    enrollUrl: "https://www.powershellacademy.com/courses/Powershell-for-SQL-Server-DBAs-1688871978752-64aa242ae4b04cc8360b40a2",
+    labUrl: "https://labs.powershellacademy.com",
+    tags: ["13 modules", "Video", "AI Mentor"]
+  },
+  "ps-essential": {
+    title: "PowerShell Essential Training",
+    tagline: "Complete PowerShell from zero. Beginner-friendly video course with AI-powered lab for hands-on practice.",
+    image: "",
+    price: "\u20B9899",
+    originalPrice: "\u20B97,500",
+    discount: "88% OFF",
+    validity: "Lifetime access",
+    rating: "4.7",
+    ratingCount: "35",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "210",
+    language: "English",
+    instructor: "Powershell Academy",
+    enrollUrl: "https://www.powershellacademy.com/courses/Powershell-Essential-Training-by-PowershelAcademy-6309cb95e4b0ba8915b6f507",
+    labUrl: "https://ai.powershellacademy.com",
+    tags: ["Beginner", "Video", "AI Mentor"]
+  },
+  "ps-toolmaking": {
+    title: "Easy Tool Making using PowerShell in 45 Minutes",
+    tagline: "Build production-ready PowerShell tools and GUIs in just 45 minutes. Quick, practical, and hands-on.",
+    image: "",
+    price: "\u20B9899",
+    originalPrice: "\u20B92,999",
+    discount: "70% OFF",
+    validity: "Lifetime access",
+    rating: "4.6",
+    ratingCount: "22",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "145",
+    language: "English",
+    instructor: "Vishnu Gupthan Nair",
+    enrollUrl: "https://www.powershellacademy.com/courses/Fancy-Tool-Making-using-Powershell-62c9851a0cf2792b9ef04838",
+    labUrl: "https://ai.powershellacademy.com",
+    tags: ["Quick", "Video", "AI Mentor"]
+  },
+  "ps-sql-live": {
+    title: "PowerShell for SQL DBAs \u2014 Live 10 Day Class",
+    tagline: "Live instructor-led 10-day intensive class covering PowerShell automation for SQL Server DBAs.",
+    image: "",
+    price: "\u20B912,000",
+    originalPrice: "\u20B915,000",
+    discount: "20% OFF",
+    validity: "Live class schedule",
+    rating: "5.0",
+    ratingCount: "8",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "52",
+    language: "English",
+    instructor: "Vishnu Gupthan",
+    enrollUrl: "https://www.powershellacademy.com/courses/Powershell-for-SQL-Server-DBAs-63411a27e4b05c72bc70eef6",
+    labUrl: "https://ai.powershellacademy.com",
+    tags: ["10 days live", "AI Mentor"]
+  },
+  "server-checker": {
+    title: "Server Remote Checker Tool",
+    tagline: "Production-ready PowerShell tool to remotely check server health, services, and connectivity.",
+    image: "",
+    price: "\u20B9899",
+    originalPrice: "\u20B9999",
+    discount: "10% OFF",
+    validity: "Lifetime access",
+    rating: "4.5",
+    ratingCount: "15",
+    stars: "\u2B50\u2B50\u2B50\u2B50\u2B50",
+    learners: "95",
+    language: "English",
+    instructor: "Powershell Academy",
+    enrollUrl: "https://www.powershellacademy.com/courses/Server-Remote-Checker-Tool-6312bafae4b0bf6c7f0f9ec2",
+    labUrl: "",
+    tags: ["Utility", "Production-ready"]
+  }
+};
+
+// Read course ID from URL: courselandingpage.html?course=ai-sql-gemini
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var courseId = params.get('course');
+
+  // If no course param, default to the first available course
+  if (!courseId || !courses[courseId]) {
+    // Try to find the first course as default
+    var keys = Object.keys(courses);
+    if (keys.length > 0 && !courseId) {
+      courseId = keys[0];
+    } else {
+      document.getElementById('courseTitle').textContent = 'Course Not Found';
+      document.getElementById('courseTagline').textContent = 'Please select a course from the store.';
+      return;
+    }
+  }
+
+  var c = courses[courseId];
+
+  // Populate elements
+  document.getElementById('courseTitle').textContent = c.title;
+  document.getElementById('courseTagline').textContent = c.tagline;
+  document.getElementById('courseStars').textContent = c.stars;
+  document.getElementById('courseRatingAvg').textContent = c.rating;
+  document.getElementById('courseRatingCount').textContent = '(' + c.ratingCount + ' ratings)';
+  document.getElementById('courseLearners').innerHTML = '<strong>' + c.learners + '</strong> learners enrolled';
+  document.getElementById('courseLanguage').innerHTML = '<strong>Language:</strong> ' + c.language;
+  document.getElementById('courseInstructor').innerHTML = '<strong>Instructor:</strong> ' + c.instructor;
+
+  // Pricing
+  document.getElementById('coursePrice').textContent = c.price;
+  document.getElementById('courseOriginalPrice').textContent = c.originalPrice;
+  document.getElementById('courseDiscount').textContent = c.discount;
+  document.getElementById('courseValidity').textContent = c.validity;
+
+  // Hide discount/original if empty
+  if (!c.originalPrice) document.getElementById('courseOriginalPrice').style.display = 'none';
+  if (!c.discount) document.getElementById('courseDiscount').style.display = 'none';
+
+  // Style free courses differently
+  if (c.price === 'Free') {
+    document.getElementById('coursePrice').style.color = '#6ee7d3';
+  }
+
+  // Buttons — set ALL enrol/buy buttons to the Graphy enrollment URL
+  var enrollUrl = c.enrollUrl;
+  document.getElementById('buyBtn').href = enrollUrl;
+  document.getElementById('ctaEnrolBtn').href = enrollUrl;
+  document.getElementById('previewBtn').href = enrollUrl;
+
+  if (c.labUrl) {
+    document.getElementById('labBtn').href = c.labUrl;
+  } else {
+    document.getElementById('labBtn').style.display = 'none';
+  }
+
+  // Tags
+  var tagsHtml = '';
+  c.tags.forEach(function(tag) {
+    tagsHtml += '<span class="course-tag" style="background:rgba(0,212,170,0.12);color:#6ee7d3;">' + tag + '</span>';
+  });
+  document.getElementById('courseTags').innerHTML = tagsHtml;
+
+  // Page title
+  document.title = c.title + ' \u2014 PowerShell Academy';
+})();
+</script>
+
+</body>
+</html>
