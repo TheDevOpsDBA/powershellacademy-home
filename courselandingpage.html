@@ -289,7 +289,7 @@ footer a:hover { color: #f1f5f9; }
     <h2 style="font-size:22px;font-weight:800;margin:0 0 8px;">Ready to start learning?</h2>
     <p style="color:#cbd5e1;font-size:14px;margin:0 0 20px;">Enrol now and get instant access to video lessons, AI mentor, and hands-on labs.</p>
     <div class="btn-group" style="justify-content:center;">
-      <a href="#" class="btn btn-primary">&#x1F680; Enrol Now</a>
+      <a href="#" class="btn btn-primary" id="ctaEnrolBtn">&#x1F680; Enrol Now</a>
       <a href="store.html" class="btn btn-secondary">&#x1F4DA; Browse All Courses</a>
     </div>
   </div>
@@ -438,10 +438,17 @@ var courses = {
   var params = new URLSearchParams(window.location.search);
   var courseId = params.get('course');
 
+  // If no course param, default to the first available course
   if (!courseId || !courses[courseId]) {
-    // Default to first course or show message
-    document.getElementById('courseTitle').textContent = 'Course Not Found';
-    return;
+    // Try to find the first course as default
+    var keys = Object.keys(courses);
+    if (keys.length > 0 && !courseId) {
+      courseId = keys[0];
+    } else {
+      document.getElementById('courseTitle').textContent = 'Course Not Found';
+      document.getElementById('courseTagline').textContent = 'Please select a course from the store.';
+      return;
+    }
   }
 
   var c = courses[courseId];
@@ -471,8 +478,12 @@ var courses = {
     document.getElementById('coursePrice').style.color = '#6ee7d3';
   }
 
-  // Buttons
-  document.getElementById('buyBtn').href = c.enrollUrl;
+  // Buttons — set ALL enrol/buy buttons to the Graphy enrollment URL
+  var enrollUrl = c.enrollUrl;
+  document.getElementById('buyBtn').href = enrollUrl;
+  document.getElementById('ctaEnrolBtn').href = enrollUrl;
+  document.getElementById('previewBtn').href = enrollUrl;
+
   if (c.labUrl) {
     document.getElementById('labBtn').href = c.labUrl;
   } else {
