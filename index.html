@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerShell Academy — Learn by Doing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #050810; color: #f1f5f9 !important; } h1, h2, h3, h4, p, span, a, div, li, ol, ul, strong, em { color: inherit; }
+a { text-decoration: none; }
+img { max-width: 100%; }
+section { color: #f1f5f9 !important; }
+section h1, section h2, section h3 { color: #f1f5f9 !important; }
+section[data-theme="light"] { color: #0f172a !important; }
+section[data-theme="light"] h2, section[data-theme="light"] h3 { color: #0f172a !important; }
+section[data-theme="light"] p { color: #475569 !important; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HERO                                                          -->
+<!-- ============================================================ -->
+<section style="background:#050810 !important;padding:20px 16px 40px;">
+<div style="max-width:1100px;margin:0 auto;">
+
+<!-- Nav pills -->
+<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(148,163,184,0.1);">
+<a href="https://pylabs.powershellacademy.com" target="_blank" style="padding:5px 8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.25);border-radius:6px;color:#6ee7d3;font-size:10px;font-weight:600;">&#x1F40D; Python</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="padding:5px 8px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:6px;color:#a5b4fc;font-size:10px;font-weight:600;">&#x1F916; AI DBA</a>
+<a href="https://labs.powershellacademy.com" target="_blank" style="padding:5px 8px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:6px;color:#fcd34d;font-size:10px;font-weight:600;">&#x26A1; PS DBA</a>
+<a href="https://jiralabs.powershellacademy.com" target="_blank" style="padding:5px 8px;background:rgba(0,180,216,0.1);border:1px solid rgba(0,180,216,0.25);border-radius:6px;color:#67e8f9;font-size:10px;font-weight:600;">&#x1F4CB; Jira</a>
+<span style="flex:1;min-width:4px;"></span>
+<a href="https://www.powershellacademy.com/s/pages/serverremotecheck" target="_blank" style="padding:5px 8px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);border-radius:6px;color:#6ee7d3;font-size:10px;font-weight:700;">&#x1F4E5; Free: Server Remote Checker</a>
+<a href="https://www.powershellacademy.com/s/store" style="padding:5px 8px;color:#94a3b8;font-size:10px;font-weight:500;">&#x1F4DA; Courses</a>
+<a href="https://chat.whatsapp.com/EotpYGKYlZKDSKJWO6vCu8" target="_blank" style="padding:5px 8px;color:#94a3b8;font-size:10px;font-weight:500;">&#x1F4AC; Community</a>
+</div>
+
+<!-- Headline -->
+<div style="text-align:center;margin-bottom:32px;">
+<div style="margin-bottom:14px;">
+<span style="display:inline-block;background:rgba(0,212,170,0.12);color:#6ee7d3;border:1px solid rgba(0,212,170,0.3);padding:5px 12px;border-radius:14px;font-size:10px;font-weight:500;">&#x1F7E2; AI-powered labs in every course</span>
+</div>
+<h1 style="font-size:clamp(30px,7vw,60px);line-height:1.05;font-weight:900;letter-spacing:-0.02em;margin:0 0 16px;color:#f1f5f9 !important;">Skip the slides.<br><span style="color:#00d4aa !important;text-shadow:0 0 40px rgba(0,212,170,0.3);">Ship the script.</span></h1>
+<p style="color:#cbd5e1;font-size:clamp(14px,3vw,17px);line-height:1.65;margin:0 auto 24px;max-width:560px;">Hands-on courses for <strong style="color:#fff;">SQL Server DBAs</strong> &amp; automation engineers. <strong style="color:#fff;">PowerShell</strong>, <strong style="color:#fff;">Python</strong>, <strong style="color:#fff;">AI</strong> &#8212; with a personal AI mentor in every lab.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;">
+<a href="https://www.powershellacademy.com/s/store" style="padding:13px 24px;border-radius:10px;font-weight:700;font-size:14px;background:linear-gradient(135deg,#00d4aa,#6366f1);color:#fff;box-shadow:0 6px 20px rgba(0,212,170,0.3);">&#x1F680; Explore Courses</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="padding:13px 24px;border-radius:10px;font-weight:600;font-size:14px;color:#f1f5f9;border:1px solid rgba(255,255,255,0.2);">&#x25B6; Try a Lab Free</a>
+<a href="https://www.powershellacademy.com/s/pages/serverremotecheck" target="_blank" style="padding:13px 24px;border-radius:10px;font-weight:600;font-size:14px;color:#6ee7d3;border:1px solid rgba(52,211,153,0.3);">&#x1F4E5; Free Server Tool</a>
+</div>
+<div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding-top:18px;border-top:1px solid rgba(148,163,184,0.1);">
+<div style="text-align:center;"><strong style="color:#00d4aa;font-size:20px;">4</strong><br><span style="font-size:10px;color:#94a3b8;">Labs</span></div>
+<div style="text-align:center;"><strong style="color:#00d4aa;font-size:20px;">100+</strong><br><span style="font-size:10px;color:#94a3b8;">Exercises</span></div>
+<div style="text-align:center;"><strong style="color:#00d4aa;font-size:20px;">AI</strong><br><span style="font-size:10px;color:#94a3b8;">Mentor</span></div>
+<div style="text-align:center;"><strong style="color:#00d4aa;font-size:20px;">0</strong><br><span style="font-size:10px;color:#94a3b8;">Install</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- COURSES                                                       -->
+<!-- ============================================================ -->
+<section style="background:#0a0f1a !important;padding:56px 16px;color:#f1f5f9 !important;">
+<div style="max-width:1100px;margin:0 auto;">
+<div style="text-align:center;margin-bottom:36px;">
+<span style="display:inline-block;background:rgba(0,212,170,0.12);color:#6ee7d3;border:1px solid rgba(0,212,170,0.3);padding:5px 12px;border-radius:14px;font-size:11px;font-weight:600;letter-spacing:1.2px;">&#x1F393; OUR COURSES</span>
+<h2 style="font-size:clamp(22px,5vw,36px);margin:14px 0 8px;font-weight:800;color:#f1f5f9 !important;">Learn by doing. AI lab in every course.</h2>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;">
+
+<!-- Card template repeats -->
+<div style="background:#111827;border:1px solid rgba(245,158,11,0.2);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x26A1;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">PowerShell for SQL Server DBAs</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">Backups, monitoring, Always On AGs. 13 modules.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(245,158,11,0.12);color:#fcd34d;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">13 modules</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/courses/Powershell-for-SQL-Server-DBAs-1688871978752-64aa242ae4b04cc8360b40a2" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">Enrol</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+<div style="background:#111827;border:1px solid rgba(0,212,170,0.2);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#0d2818,#1a3a2a);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x1F40D;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">Python for AI</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">Python from scratch to ML. Live in browser. 15 modules.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">15 modules</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/s/store" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#00d4aa,#6366f1);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">Enrol</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+<div style="background:#111827;border:1px solid rgba(99,102,241,0.2);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#1a1033,#0f0a2a);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x1F916;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">AI for SQL Server DBAs</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">LangChain, RAG, AI agents for DBA work. 16 modules.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(99,102,241,0.12);color:#a5b4fc;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">16 modules</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/courses/SQL-Server-News-Letter-creation-Web-App-using-Gemini-and-node-js-69a26c71b3e4737930af1c4f" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">Enrol</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+<div style="background:#111827;border:1px solid rgba(0,180,216,0.2);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#0a1929,#0d2137);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x1F4CB;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">Jira Automation with PowerShell</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">Tickets, transitions, alerts via REST APIs. 12 modules.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(0,180,216,0.12);color:#67e8f9;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">12 modules</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/s/store" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#00b4d8,#6366f1);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">Enrol</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+<div style="background:#111827;border:1px solid rgba(148,163,184,0.15);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#1a1a2e,#0f0f23);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x1F4BB;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">PowerShell Essential Training</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">Complete PowerShell from zero. Beginner friendly.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(148,163,184,0.12);color:#94a3b8;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">Beginner</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/courses/Powershell-Essential-Training-by-PowershelAcademy-6309cb95e4b0ba8915b6f507" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">&#x20B9;899</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+<div style="background:#111827;border:1px solid rgba(148,163,184,0.15);border-radius:14px;width:300px;overflow:hidden;">
+<div style="height:140px;background:linear-gradient(135deg,#1a1a2e,#0f0f23);display:flex;align-items:center;justify-content:center;position:relative;">
+<span style="font-size:48px;">&#x1F6E0;</span>
+<span style="position:absolute;top:8px;right:8px;background:#00d4aa;color:#0a0f1a;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;">AI LAB</span>
+</div>
+<div style="padding:16px;">
+<h3 style="font-size:15px;font-weight:700;margin:0 0 4px;color:#f1f5f9 !important;">Tool Making with PowerShell</h3>
+<p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4;">Build production-ready tools &amp; GUIs in 45 min.</p>
+<div style="display:flex;gap:6px;margin-bottom:10px;">
+<span style="background:rgba(148,163,184,0.12);color:#94a3b8;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">Quick</span>
+<span style="background:rgba(0,212,170,0.12);color:#6ee7d3;font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;">&#x1F916; AI Mentor</span>
+</div>
+<div style="display:flex;gap:6px;">
+<a href="https://www.powershellacademy.com/courses/Fancy-Tool-Making-using-Powershell-62c9851a0cf2792b9ef04838" style="flex:1;text-align:center;padding:8px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-radius:6px;font-size:11px;font-weight:700;">&#x20B9;899</a>
+<a href="https://ai.powershellacademy.com" target="_blank" style="flex:1;text-align:center;padding:8px;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);color:#6ee7d3;border-radius:6px;font-size:11px;font-weight:600;">&#x1F9EA; Lab</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AI MENTOR                                                     -->
+<!-- ============================================================ -->
+<section style="background:#050810 !important;padding:56px 16px;color:#f1f5f9 !important;">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+<span style="display:inline-block;background:rgba(99,102,241,0.15);color:#c7d2fe;border:1px solid rgba(99,102,241,0.35);padding:5px 12px;border-radius:14px;font-size:11px;font-weight:700;letter-spacing:1.2px;margin-bottom:16px;">&#x1F916; INSIDE EVERY LAB</span>
+<h2 style="font-size:clamp(22px,5vw,38px);font-weight:800;line-height:1.15;margin:0 0 14px;color:#f1f5f9 !important;">An AI mentor that <span style="color:#00d4aa !important;">sees your code.</span></h2>
+<p style="color:#cbd5e1;font-size:14px;line-height:1.7;margin:0 auto 20px;max-width:560px;">Every lab includes an AI mentor that reads your code, understands the lesson context, and gives real answers in seconds. No more being stuck alone.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:24px;">
+<span style="background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);padding:6px 12px;border-radius:8px;font-size:11px;color:#6ee7d3;">&#x1F9E0; Context-aware</span>
+<span style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);padding:6px 12px;border-radius:8px;font-size:11px;color:#a5b4fc;">&#x1F4AC; Conversational</span>
+<span style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:6px 12px;border-radius:8px;font-size:11px;color:#fcd34d;">&#x1F9EA; Auto-grades</span>
+<span style="background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);padding:6px 12px;border-radius:8px;font-size:11px;color:#67e8f9;">&#x26A1; Suggested prompts</span>
+</div>
+<a href="https://ai.powershellacademy.com" target="_blank" style="display:inline-block;padding:13px 24px;background:linear-gradient(135deg,#00d4aa,#6366f1);color:#fff;border-radius:10px;font-weight:700;font-size:14px;box-shadow:0 4px 16px rgba(0,212,170,0.25);">&#x25B6; Try the AI Mentor Free</a>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- WHY POWERSHELL ACADEMY                                        -->
+<!-- ============================================================ -->
+<section style="background:#fff;padding:56px 16px;color:#0f172a !important;" data-theme="light">
+<div style="max-width:900px;margin:0 auto;">
+<div style="text-align:center;margin-bottom:36px;">
+<span style="display:inline-block;background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;padding:5px 12px;border-radius:14px;font-size:11px;font-weight:600;letter-spacing:1.2px;">WHY POWERSHELL ACADEMY</span>
+<h2 style="font-size:clamp(22px,5vw,34px);font-weight:800;margin:14px 0 0;color:#0f172a !important;">Built for engineers who learn by doing.</h2>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F3AF;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">Built for novices</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Every module starts at zero. No assumptions.</p>
+</div>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F916;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">AI mentor in every lab</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Stuck? Ask the mentor. It sees your code.</p>
+</div>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F9EA;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">Real, runnable examples</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Every lesson has working code to run in your browser.</p>
+</div>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F3C6;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">Auto-graded challenges</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Earn XP. AI evaluates every submission.</p>
+</div>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F4AC;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">Monthly live Q&amp;A</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Doubt-clarification sessions every month.</p>
+</div>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;width:260px;">
+<div style="font-size:24px;margin-bottom:8px;">&#x1F4DC;</div>
+<h3 style="font-size:14px;font-weight:700;margin:0 0 6px;color:#0f172a !important;">Certification</h3>
+<p style="color:#475569;font-size:12px;line-height:1.5;margin:0;">Verifiable certificate on completion.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TESTIMONIALS                                                   -->
+<!-- ============================================================ -->
+<section style="background:#050810 !important;padding:56px 16px;color:#f1f5f9 !important;">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+<h2 style="font-size:24px;font-weight:800;margin:0 0 24px;color:#f1f5f9 !important;">What students say</h2>
+<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+<div style="background:#111827;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;width:240px;text-align:left;">
+<div style="color:#f59e0b;font-size:14px;margin-bottom:8px;">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+<p style="color:#cbd5e1;font-size:12px;line-height:1.5;margin:0 0 10px;font-style:italic;">"Best training for someone with zero PowerShell knowledge."</p>
+<strong style="color:#f1f5f9;font-size:11px;">&#8212; Karthik BV</strong>
+</div>
+<div style="background:#111827;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;width:240px;text-align:left;">
+<div style="color:#f59e0b;font-size:14px;margin-bottom:8px;">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+<p style="color:#cbd5e1;font-size:12px;line-height:1.5;margin:0 0 10px;font-style:italic;">"Love the course, can't wait to make my own GUI from PowerShell."</p>
+<strong style="color:#f1f5f9;font-size:11px;">&#8212; Jason Mitchell Cole</strong>
+</div>
+<div style="background:#111827;border:1px solid rgba(148,163,184,0.15);border-radius:12px;padding:20px;width:240px;text-align:left;">
+<div style="color:#f59e0b;font-size:14px;margin-bottom:8px;">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div>
+<p style="color:#cbd5e1;font-size:12px;line-height:1.5;margin:0 0 10px;font-style:italic;">"Great course. Good starting point for automation."</p>
+<strong style="color:#f1f5f9;font-size:11px;">&#8212; Allan Laird</strong>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER                                                        -->
+<!-- ============================================================ -->
+<footer style="background:#0a0f1a !important;padding:32px 16px;border-top:1px solid rgba(148,163,184,0.1);text-align:center;">
+<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;">
+<a href="https://www.facebook.com/powershellacademy" target="_blank" style="color:#94a3b8;font-size:12px;">Facebook</a>
+<a href="https://www.linkedin.com/in/vishnu-gupthan-nair-09a12b31/" target="_blank" style="color:#94a3b8;font-size:12px;">LinkedIn</a>
+<a href="https://www.youtube.com/c/GraphyUniversity" target="_blank" style="color:#94a3b8;font-size:12px;">YouTube</a>
+<a href="https://play.google.com/store/apps/details?id=com.powershellacademy.learners" target="_blank" style="color:#94a3b8;font-size:12px;">Android App</a>
+</div>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;">
+<a href="https://www.powershellacademy.com/privacypolicy" style="color:#64748b;font-size:11px;">Privacy</a>
+<a href="https://www.powershellacademy.com/termsofuse" style="color:#64748b;font-size:11px;">Terms</a>
+<a href="https://www.powershellacademy.com/contactus" style="color:#64748b;font-size:11px;">Contact</a>
+<a href="https://www.powershellacademy.com/refundpolicy" style="color:#64748b;font-size:11px;">Refund</a>
+</div>
+<p style="color:#475569;font-size:10px;">PowerShell Academy &#169; 2026</p>
+</footer>
+
+</body>
+</html>
